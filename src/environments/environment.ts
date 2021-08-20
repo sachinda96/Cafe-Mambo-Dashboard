@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
 };
+
+export const BASE_URL = 'http://localhost:8080'; //'http://yjv1g.mocklab.io'; //;
+export const CLOUD_API_URL = '';
+export const AUTH_API = '';
+export const ITEMS_LIST_URL = '';
+export const ITEMS_PER_PAGE_COUNT = 9;
 
 /*
  * For easier debugging in development mode, you can import the following file
