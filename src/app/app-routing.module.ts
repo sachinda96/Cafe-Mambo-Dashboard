@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {OnlineOrdersComponent} from "./online-orders/online-orders.component";
 import {ViewOrderComponent} from "./view-order/view-order.component";
+import {ManageItemComponent} from "./manage-item/manage-item.component";
+import {ViewItemComponent} from "./view-item/view-item.component";
 
 const routes: Routes = [
 
@@ -46,6 +48,18 @@ const routes: Routes = [
       {
         path:"vieworder/:id",
         component:ViewOrderComponent
+      },
+      {
+        path:"manageitem",
+        component:ManageItemComponent
+      },
+      {
+        path:"manageitem/:id",
+        component:ManageItemComponent
+      },
+      {
+        path:"allitems",
+        component:ViewItemComponent
       },
     ]
 
