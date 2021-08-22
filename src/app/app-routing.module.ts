@@ -7,6 +7,8 @@ import {OnlineOrdersComponent} from "./online-orders/online-orders.component";
 import {ViewOrderComponent} from "./view-order/view-order.component";
 import {ManageItemComponent} from "./manage-item/manage-item.component";
 import {ViewItemComponent} from "./view-item/view-item.component";
+import {ManagePackageComponent} from "./manage-package/manage-package.component";
+import {AllPackagesComponent} from "./all-packages/all-packages.component";
 
 const routes: Routes = [
 
@@ -60,6 +62,18 @@ const routes: Routes = [
       {
         path:"allitems",
         component:ViewItemComponent
+      },
+      {
+        path:"newpackage",
+        component:ManagePackageComponent
+      },
+      {
+        path:"newpackage/:id",
+        component:ManagePackageComponent
+      },
+      {
+        path:"allpackage",
+        component:AllPackagesComponent
       },
     ]
 
