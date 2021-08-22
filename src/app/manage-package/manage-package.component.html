@@ -1,0 +1,150 @@
+<div class="content-wrapper">
+
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Manage Item</h3>
+    </div>
+    <form>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label >Item Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Package Name" [(ngModel)]="package.name">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label >Price</label>
+              <input type="number" class="form-control" placeholder="Price" id="price" name="price" [(ngModel)]="package.price">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label >Description</label>
+              <textarea class="form-control" rows="5" placeholder="Enter ..." id="description" name="description" [(ngModel)]="package.description"></textarea>
+            </div>
+          </div>
+        </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+          <label for="exampleInputFile">File input</label>
+          <div class="input-group">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="exampleInputFile" (change)="fileChange($event)">
+              <label class="custom-file-label" for="exampleInputFile" (change)="fileChange($event)">Choose file</label>
+            </div>
+          </div>
+            </div>
+
+          </div>
+
+<br>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Category</label>
+                <select class="form-control select2" style="width: 100%;" (change)="setCategory($event)" >
+                  <option selected="selected">---Select Category---</option>
+                  <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Item List</h3>
+
+            </div>
+
+            <div class="card-body table-responsive p-0" style="height: 300px;">
+              <table class="table table-head-fixed text-nowrap">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th>ITem Name</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of itemList">
+                  <td>
+                    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="{{item.select}}" (click)="setItem(item.id)">
+                  </td>
+                  <td><img src="{{item.imagePath}}" style="height: 60px;width: 60px"></td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.categoryName}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-danger" >Cancel</button>
+        <button type="submit" class="btn btn-primary" style="float: right;" (click)="save()">{{type}}</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+
+<button id="modelSuccess"  name="modelSuccess" [hidden]="true" data-toggle="modal" data-target="#modal-success">Open Modal</button>
+<div class="modal fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+      <div class="modal-header">
+        <h4 class="modal-title">Success</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{message}}&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="clear()">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button id="dangerModel"  name="dangerModel" [hidden]="true" data-toggle="modal" data-target="#modal-danger"></button>
+<div class="modal fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+      <div class="modal-header">
+        <h4 class="modal-title">Failed</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{failedMessage}}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button id="close" type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
