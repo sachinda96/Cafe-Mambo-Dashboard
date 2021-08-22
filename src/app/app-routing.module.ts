@@ -9,6 +9,7 @@ import {ManageItemComponent} from "./manage-item/manage-item.component";
 import {ViewItemComponent} from "./view-item/view-item.component";
 import {ManagePackageComponent} from "./manage-package/manage-package.component";
 import {AllPackagesComponent} from "./all-packages/all-packages.component";
+import {ManageCategoryComponent} from "./manage-category/manage-category.component";
 
 const routes: Routes = [
 
@@ -74,6 +75,10 @@ const routes: Routes = [
       {
         path:"allpackage",
         component:AllPackagesComponent
+      },
+      {
+        path:"managecategory",
+        component:ManageCategoryComponent
       },
     ]
 
