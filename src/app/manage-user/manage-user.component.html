@@ -1,1 +1,234 @@
-<p>manage-user works!</p>
+<div class="content-wrapper">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Manage Employee</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Employee No</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="empNo"
+                  name="employeeNo"
+                  placeholder="Employee No"
+                  [(ngModel)]="employee.employeeNo"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Employee Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="empName"
+                name="employeeName"
+                placeholder="Employee Name"
+                [(ngModel)]="employee.name"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Telephone No</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Telephone No"
+                id="telephoneNo"
+                name="telephoneNo"
+                [(ngModel)]="employee.telNo"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Role</label>
+              <!--[(ngModel)]="item.price"-->
+              <select
+                class="form-control select2"
+                style="width: 100%"
+                (change)="setUserRole($event)"
+                [value]="employee.role"
+              >
+                <option selected="selected">---Select Category---</option>
+                <option *ngFor="let role of roles" value="{{ role }}">
+                  {{ role }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                id="email"
+                name="email"
+                [(ngModel)]="employee.email"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                id="password"
+                name="password"
+                [(ngModel)]="employee.loginEntity.password"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>status</label>
+              <input
+                type="string"
+                class="form-control"
+                placeholder="Status"
+                id="status"
+                name="status"
+                [(ngModel)]="employee.status"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label>Address</label>
+              <textarea
+                class="form-control"
+                rows="5"
+                placeholder="Enter Address"
+                id="address"
+                name="address"
+                [(ngModel)]="employee.address"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-danger">Cancel</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="float: right"
+          (click)="save()"
+        >
+          {{ type }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<button
+  id="modelSuccess"
+  name="modelSuccess"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-success"
+>
+  Open Modal
+</button>
+<div class="modal fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+      <div class="modal-header">
+        <h4 class="modal-title">Success</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ message }}&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+          (click)="clear()"
+        >
+          Done
+        </button>
+        <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<button
+  id="dangerModel"
+  name="dangerModel"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-danger"
+></button>
+
+<div class="modal fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+      <div class="modal-header">
+        <h4 class="modal-title">Failed</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ failedMessage }}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button
+          id="close"
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

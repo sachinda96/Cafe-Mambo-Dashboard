@@ -16,6 +16,7 @@ import { ManagePackageComponent } from './manage-package/manage-package.componen
 import { AllPackagesComponent } from './all-packages/all-packages.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ViewUserComponent } from './view-user/view-user.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
     ManagePackageComponent,
     AllPackagesComponent,
     ManageCategoryComponent,
-    ManageUserComponent
+    ManageUserComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,
