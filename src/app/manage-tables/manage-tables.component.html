@@ -1,0 +1,116 @@
+
+<div class="content-wrapper">
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Manage Table</h3>
+    </div>
+
+    <form>
+
+      <div class="card-body">
+        <div class="row" *ngIf="isAdd == false">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label >Table Number</label>
+              <select class="form-control select2" style="width: 100%;" (change)="setNumber($event)" >
+                <option selected="selected">---Select Number---</option>
+                <option *ngFor="let table of tableList" value="{{table.tableNumber}}">{{table.tableNumber}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <br>
+                <i class="fas fa-plus-circle fa-3x" style="color:blue;" (click)="isAddNew()"></i>
+
+            </div>
+          </div>
+        </div>
+        <div>
+
+          <div class="row" *ngIf="isAdd">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label >Table Number</label>
+                <input type="number" class="form-control" placeholder="Table Number" id="tableNumber" name="tableNumber" [(ngModel)]="shopTable.tableNumber">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <br>
+                <a class="btn btn-app">
+                <i class="fas fa-play"  (click)="generateTable()" style="color: blue"></i> Generate QR
+                </a>
+                <!--              <button type="submit" class="btn btn-primary"  (click)="generateTable()" style="margin-top: 10px">Generate Table</button>-->
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row" >
+            <div class="col-lg-4"></div>
+            <div class="col-lg-8">
+              <qrcode *ngIf="isGenerateQr" [qrdata]="data" [width]="500" [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
+            <div class="col-lg-2"></div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        <button *ngIf="isAdd" type="submit" class="btn btn-primary" style="float: right;" (click)="save()">{{type}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<button id="modelSuccess"  name="modelSuccess" [hidden]="true" data-toggle="modal" data-target="#modal-success">Open Modal</button>
+<div class="modal fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+      <div class="modal-header">
+        <h4 class="modal-title">Success</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{message}}&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="clear()">Done</button>
+        <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<button id="dangerModel"  name="dangerModel" [hidden]="true" data-toggle="modal" data-target="#modal-danger"></button>
+
+<div class="modal fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+      <div class="modal-header">
+        <h4 class="modal-title">Failed</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{failedMessage}}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button id="close" type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

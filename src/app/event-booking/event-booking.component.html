@@ -1,0 +1,62 @@
+
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Package List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Package Name</th>
+                  <th>Customer Name </th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let event of eventBookingList">
+                  <td>{{event.bookDate}}</td>
+<!--                  <td>{{event.price}}</td>-->
+<!--                  <td><i style="color: orange" class="fas fa-edit" [routerLink]="['/nav/newpackage',event.id]"></i></td>-->
+<!--                  <td><i style="color: red" class="fas fa-trash-alt" (click)="cancelEvent(event.id)"></i></td>-->
+
+                </tr>
+
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+              </table>
+              <!--              <nav aria-label="Page navigation example" style="float: right">-->
+              <!--                <ul class="pagination">-->
+              <!--                  <li class="page-item">-->
+              <!--                    <a class="page-link" href="#" aria-label="Previous">-->
+              <!--                      <span aria-hidden="true">&laquo;</span>-->
+              <!--                      <span class="sr-only">Previous</span>-->
+              <!--                    </a>-->
+              <!--                  </li>-->
+              <!--                  <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+              <!--                  <li class="page-item">-->
+              <!--                    <a class="page-link" href="#" aria-label="Next">-->
+              <!--                      <span aria-hidden="true">&raquo;</span>-->
+              <!--                      <span class="sr-only">Next</span>-->
+              <!--                    </a>-->
+              <!--                  </li>-->
+              <!--                </ul>-->
+              <!--              </nav>-->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

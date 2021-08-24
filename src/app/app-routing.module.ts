@@ -10,6 +10,8 @@ import {ViewItemComponent} from "./view-item/view-item.component";
 import {ManagePackageComponent} from "./manage-package/manage-package.component";
 import {AllPackagesComponent} from "./all-packages/all-packages.component";
 import {ManageCategoryComponent} from "./manage-category/manage-category.component";
+import {ManageTablesComponent} from "./manage-tables/manage-tables.component";
+import {EventBookingComponent} from "./event-booking/event-booking.component";
 
 const routes: Routes = [
 
@@ -79,6 +81,14 @@ const routes: Routes = [
       {
         path:"managecategory",
         component:ManageCategoryComponent
+      },
+      {
+        path:"managetable",
+        component:ManageTablesComponent
+      },
+      {
+        path:"eventbooking",
+        component:EventBookingComponent
       },
     ]
 

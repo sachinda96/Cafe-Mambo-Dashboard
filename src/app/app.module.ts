@@ -16,6 +16,9 @@ import { ManagePackageComponent } from './manage-package/manage-package.componen
 import { AllPackagesComponent } from './all-packages/all-packages.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { ManageTablesComponent } from './manage-tables/manage-tables.component';
+import {QRCodeModule} from "angularx-qrcode";
+import { EventBookingComponent } from './event-booking/event-booking.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +33,17 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
     ManagePackageComponent,
     AllPackagesComponent,
     ManageCategoryComponent,
-    ManageUserComponent
+    ManageUserComponent,
+    ManageTablesComponent,
+    EventBookingComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
