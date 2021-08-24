@@ -1,0 +1,198 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Item List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Contact No</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emp of userList">
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.email }}</td>
+                    <td>{{ emp.role }}</td>
+                    <td>{{ emp.telNo }}</td>
+                    <td>
+                      <i
+                        style="color: orange"
+                        class="fas fa-edit"
+                        [routerLink]="['/nav/manageuser', emp.id]"
+                      ></i>
+                    </td>
+                    <td>
+                      <i
+                        style="color: red"
+                        class="fas fa-trash-alt"
+                        (click)="deleteUser(emp.id)"
+                      ></i>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot></tfoot>
+              </table>
+<!--              <nav aria-label="Page navigation example" style="float: right">-->
+<!--                <ul class="pagination">-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" href="#" aria-label="Previous">-->
+<!--                      <span aria-hidden="true">&laquo;</span>-->
+<!--                      <span class="sr-only">Previous</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                  <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" href="#" aria-label="Next">-->
+<!--                      <span aria-hidden="true">&raquo;</span>-->
+<!--                      <span class="sr-only">Next</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </nav>-->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button
+  id="modelSuccess"
+  name="modelSuccess"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-success"
+>
+  Open Modal
+</button>
+<div class="modal fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+      <div class="modal-header">
+        <h4 class="modal-title">Success</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ message }}&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+        >
+          Done
+        </button>
+        <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  id="dangerModel"
+  name="dangerModel"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-danger"
+></button>
+
+<div class="modal fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+      <div class="modal-header">
+        <h4 class="modal-title">Failed</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ failedMessage }}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button
+          id="close"
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  id="validateModel"
+  name="dangerModel"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-secondary"
+></button>
+
+<div class="modal fade" id="modal-secondary">
+  <div class="modal-dialog">
+    <div class="modal-content bg-secondary">
+      <div class="modal-header">
+        <h4 class="modal-title">Item Delete</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to delete this user&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+          (click)="clearSelect()"
+        >
+          No
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+          (click)="delete()"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

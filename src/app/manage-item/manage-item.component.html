@@ -1,99 +1,167 @@
 <div class="content-wrapper">
-<div class="card card-primary">
-  <div class="card-header">
-    <h3 class="card-title">Manage Item</h3>
+  <div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Manage Item</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div class="form-group">
+                <label>Category</label>
+                <select
+                  class="form-control select2"
+                  style="width: 100%"
+                  (change)="setCategory($event)"
+                  [value]="item.categoryId"
+                >
+                  <option selected="selected">---Select Category---</option>
+                  <option
+                    *ngFor="let category of categoryList"
+                    value="{{ category.id }}"
+                  >
+                    {{ category.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Item Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Item Name"
+                [(ngModel)]="item.name"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Price</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Price"
+                id="price"
+                name="price"
+                [(ngModel)]="item.price"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea
+                class="form-control"
+                rows="5"
+                placeholder="Enter ..."
+                id="description"
+                name="description"
+                [(ngModel)]="item.description"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="form-group">
+              <label for="exampleInputFile">File input</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="exampleInputFile"
+                    (change)="fileChange($event)"
+                  />
+                  <label
+                    class="custom-file-label"
+                    for="exampleInputFile"
+                    (change)="fileChange($event)"
+                    >Choose file</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <br />
+              <i
+                class="fas fa-eye fa-lg"
+                style="margin-top: 20px"
+                *ngIf="item.imagePath != ''"
+                (click)="viewImage()"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-danger">Cancel</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="float: right"
+          (click)="save()"
+        >
+          {{ type }}
+        </button>
+      </div>
+    </form>
   </div>
-  <!-- /.card-header -->
-  <!-- form start -->
-  <form>
-
-    <div class="card-body">
-
-      <div class="row">
-        <div class="col-lg-6">
-      <div class="form-group">
-        <div class="form-group">
-          <label>Category</label>
-          <select class="form-control select2" style="width: 100%;" (change)="setCategory($event)" [value]="item.categoryId">
-            <option selected="selected">---Select Category---</option>
-            <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.name}}</option>
-          </select>
-        </div>
-      </div>
-        </div>
-        <div class="col-lg-6">
-      <div class="form-group">
-        <label >Item Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Item Name" [(ngModel)]="item.name">
-      </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label >Price</label>
-            <input type="number" class="form-control" placeholder="Price" id="price" name="price" [(ngModel)]="item.price">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="form-group">
-            <label >Description</label>
-            <textarea class="form-control" rows="5" placeholder="Enter ..." id="description" name="description" [(ngModel)]="item.description"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-8">
-      <div class="form-group">
-        <label for="exampleInputFile">File input</label>
-        <div class="input-group">
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="exampleInputFile" (change)="fileChange($event)">
-            <label class="custom-file-label" for="exampleInputFile" (change)="fileChange($event)">Choose file</label>
-          </div>
-
-        </div>
-      </div>
-
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <br>
-            <i class="fas fa-eye fa-lg" style="margin-top: 20px" *ngIf="item.imagePath != ''" (click)="viewImage()"></i>
-          </div>
-          </div>
-      </div>
-    </div>
-    <!-- /.card-body -->
-
-    <div class="card-footer">
-      <button type="submit" class="btn btn-danger" >Cancel</button>
-      <button type="submit" class="btn btn-primary" style="float: right;" (click)="save()">{{type}}</button>
-    </div>
-  </form>
-</div>
 </div>
 
-
-<button id="modelSuccess"  name="modelSuccess" [hidden]="true" data-toggle="modal" data-target="#modal-success">Open Modal</button>
+<button
+  id="modelSuccess"
+  name="modelSuccess"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-success"
+>
+  Open Modal
+</button>
 <div class="modal fade" id="modal-success">
   <div class="modal-dialog">
     <div class="modal-content bg-success">
       <div class="modal-header">
         <h4 class="modal-title">Success</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>{{message}}&hellip;</p>
+        <p>{{ message }}&hellip;</p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="clear()">Done</button>
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+          (click)="clear()"
+        >
+          Done
+        </button>
         <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
       </div>
     </div>
@@ -102,22 +170,40 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<button id="dangerModel"  name="dangerModel" [hidden]="true" data-toggle="modal" data-target="#modal-danger"></button>
+<button
+  id="dangerModel"
+  name="dangerModel"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-danger"
+></button>
 
 <div class="modal fade" id="modal-danger">
   <div class="modal-dialog">
     <div class="modal-content bg-danger">
       <div class="modal-header">
         <h4 class="modal-title">Failed</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>{{failedMessage}}</p>
+        <p>{{ failedMessage }}</p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button id="close" type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+        <button
+          id="close"
+          type="button"
+          class="btn btn-outline-light"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -126,28 +212,47 @@
 </div>
 <!-- /.modal -->
 
-<button id="imageModel"  name="imageModel" [hidden]="true" data-toggle="modal" data-target="#modal-default"></button>
+<button
+  id="imageModel"
+  name="imageModel"
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#modal-default"
+></button>
 
 <div class="modal fade" id="modal-default">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Item Image</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-        </button>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-             <img src="{{item.imagePath}}" style="max-width:100%;max-height:100%;height: auto;width:auto;">
+              <img
+                src="{{ item.imagePath }}"
+                style="
+                  max-width: 100%;
+                  max-height: 100%;
+                  height: auto;
+                  width: auto;
+                "
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>

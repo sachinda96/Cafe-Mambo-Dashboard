@@ -19,6 +19,8 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ManageTablesComponent } from './manage-tables/manage-tables.component';
 import {QRCodeModule} from "angularx-qrcode";
 import { EventBookingComponent } from './event-booking/event-booking.component';
+import { ViewUserComponent } from './view-user/view-user.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { EventBookingComponent } from './event-booking/event-booking.component';
     ManageUserComponent,
     ManageTablesComponent,
     EventBookingComponent,
-
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,

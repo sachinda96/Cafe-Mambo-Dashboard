@@ -14,4 +14,8 @@ export class EventBookingService {
   getPendingOrder():Observable<Array<EventBooking>>{
     return this.http.get<Array<EventBooking>>(MAIN+"/eventbooking/getAllPending")
   }
+
+  complete(id:string){
+    return this.http.get(MAIN+"/eventbooking/complete/"+id)
+  }
 }

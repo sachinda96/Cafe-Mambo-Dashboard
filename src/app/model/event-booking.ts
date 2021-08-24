@@ -1,5 +1,6 @@
 export class EventBooking {
 
+  id:string = "";
   name:string = "";
   email:string = "";
   contactNumber:string = "";
