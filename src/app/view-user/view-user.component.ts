@@ -17,15 +17,15 @@ export class ViewUserComponent implements OnInit {
   id: any = '';
 
   constructor(private userService: UserService) {
-    this.modelSuccess = document.getElementById('modelSuccess') as HTMLElement;
-    this.modelError = document.getElementById('dangerModel') as HTMLElement;
-    this.modelValidate = document.getElementById(
-      'validateModel'
-    ) as HTMLElement;
-    this.getAllUsers();
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.modelSuccess = document.getElementById('modelSuccess') as HTMLElement;
+    this.modelError = document.getElementById('dangerModel') as HTMLElement;
+    this.modelValidate = document.getElementById('validateModel') as HTMLElement;
+    this.getAllUsers();
+  }
 
   getAllUsers() {
     this.userList = new Array<User>();

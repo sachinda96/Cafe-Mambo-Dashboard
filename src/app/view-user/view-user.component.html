@@ -12,29 +12,25 @@
               <table id="example1" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>EmployeeNo</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Address</th>
-                    <th>TelNo</th>
-                    <th>Status</th>
+                    <th>Contact No</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let emp of userList">
-                    <td>{{ emp.employeeNo }}</td>
                     <td>{{ emp.name }}</td>
                     <td>{{ emp.email }}</td>
                     <td>{{ emp.role }}</td>
-                    <td>{{ emp.address }}</td>
                     <td>{{ emp.telNo }}</td>
-                    <td>{{ emp.status }}</td>
                     <td>
                       <i
                         style="color: orange"
                         class="fas fa-edit"
-                        [routerLink]="['/nav/manageemployee', emp.id]"
+                        [routerLink]="['/nav/manageuser', emp.id]"
                       ></i>
                     </td>
                     <td>
@@ -48,23 +44,23 @@
                 </tbody>
                 <tfoot></tfoot>
               </table>
-              <nav aria-label="Page navigation example" style="float: right">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+<!--              <nav aria-label="Page navigation example" style="float: right">-->
+<!--                <ul class="pagination">-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" href="#" aria-label="Previous">-->
+<!--                      <span aria-hidden="true">&laquo;</span>-->
+<!--                      <span class="sr-only">Previous</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                  <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" href="#" aria-label="Next">-->
+<!--                      <span aria-hidden="true">&raquo;</span>-->
+<!--                      <span class="sr-only">Next</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </nav>-->
             </div>
             <!-- /.card-body -->
           </div>
@@ -177,7 +173,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure want to delete this item&hellip;</p>
+        <p>Are you sure want to delete this user&hellip;</p>
       </div>
       <div class="modal-footer justify-content-between">
         <button

@@ -10,14 +10,11 @@ import { UserService } from '../service/user.service';
 })
 export class ManageUserComponent implements OnInit {
   roles: string[] = [
-    'Bartender',
-    'Chef',
-    'Cashier',
-    'Manager',
-    'Security',
-    'Server',
+    'ADMIN',
+    'CASHIER',
+    'KITCHEN'
   ];
-  employee: User = new User();
+  user: User = new User();
 
   message: any;
   failedMessage: any;
@@ -25,6 +22,7 @@ export class ManageUserComponent implements OnInit {
   modelError: any;
   type: any = 'Save';
   imageModel: any;
+  isDisabled:boolean = false;
 
   constructor(
     private userService: UserService,
@@ -36,6 +34,7 @@ export class ManageUserComponent implements OnInit {
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.type = 'Update';
+        this.isDisabled = true;
         this.getUser(params.id);
       }
     });
@@ -46,28 +45,29 @@ export class ManageUserComponent implements OnInit {
 
   getUser(id: any) {
     this.userService.getUser(id).subscribe((res) => {
-      this.employee = res;
+
+      this.user = res;
     });
   }
 
   setUserRole(event: any) {
-    this.employee.role = event.target.value;
+    this.user.role = event.target.value;
   }
 
   clear() {
     if (this.type == 'Update') {
-      this.route.navigate(['/nav/allemployees']);
+      this.route.navigate(['/nav/alluser']);
     } else {
-      this.employee = new User();
+      this.user = new User();
     }
   }
   save() {
-    if (this.employee.employeeNo == '') {
-      this.failedMessage = 'Enter a valid employee No';
+    if (this.user.email == '') {
+      this.failedMessage = 'Enter a valid Email';
       this.modelError.click();
     } else {
       if (this.type == 'Update') {
-        this.userService.update(this.employee).subscribe(
+        this.userService.update(this.user).subscribe(
           (res) => {
             this.message = 'Employee is Updated';
             this.modelSuccess.click();
@@ -78,7 +78,7 @@ export class ManageUserComponent implements OnInit {
           }
         );
       } else {
-        this.userService.save(this.employee).subscribe(
+        this.userService.save(this.user).subscribe(
           (res) => {
             this.message = 'Employee is Added Successfully';
             this.modelSuccess.click();
