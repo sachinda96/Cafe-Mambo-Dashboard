@@ -43,7 +43,9 @@
               "./node_modules/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css",
               "./node_modules/admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css",
               "./node_modules/admin-lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css",
-              "node_modules/sweetalert2/src/sweetalert2.scss"
+              "node_modules/sweetalert2/src/sweetalert2.scss",
+              "./node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "./node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
             "scripts": [
               "./node_modules/admin-lte/plugins/jquery/jquery.min.js",

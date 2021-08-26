@@ -1,0 +1,166 @@
+<div class="content-wrapper">
+  <!-- Main content -->
+  <div class="invoice p-3 mb-3">
+    <div class="row">
+      <div class="col-12">
+        <h4>
+          <i class="fas fa-globe"></i> Order Detail
+          <small class="float-right"></small>
+        </h4>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+      <div class="col-sm-4 invoice-col">
+        <address>
+          <strong>Customer Details</strong><br>
+          {{customerShopOrder.customerName}}<br>
+          {{customerShopOrder.contactNumber}}<br>
+        </address>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-4 invoice-col">
+        <address>
+
+        </address>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-4 invoice-col">
+        <b>Payment</b><br>
+        <br>
+        <b>Payment Method</b> {{customerShopOrder.paymentDto.method}}<br>
+        <b>Payment Status</b> {{customerShopOrder.paymentDto.paymentStatus}}<br>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-12 table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Qty</th>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Subtotal</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of customerShopOrder.itemDtoList">
+            <td>{{item.qty}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.categoryName}}</td>
+            <td>{{item.price}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.col -->
+    </div>
+
+
+    <div class="row">
+      <div class="col-6">
+
+      </div>
+
+      <div class="col-6">
+        <p class="lead">Amount </p>
+
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <th style="width:50%">Subtotal:</th>
+              <td>{{customerShopOrder.price}}</td>
+            </tr>
+            <tr>
+              <th>Delivery Cost:</th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Total:</th>
+              <td>{{customerShopOrder.price}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div class="row no-print">
+      <div class="col-12">
+        <button type="button" class="btn btn-success float-right" (click)="complete()"><i class="far fa-credit-card" ></i> Complete Order
+        </button>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+<button id="modelSuccess"  name="modelSuccess" [hidden]="true" data-toggle="modal" data-target="#modal-success">Open Modal</button>
+<div class="modal fade" id="modal-success">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+      <div class="modal-header">
+        <h4 class="modal-title">Success</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{message}}&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="done()">Done</button>
+        <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button id="dangerModel"  name="dangerModel" [hidden]="true" data-toggle="modal" data-target="#modal-danger"></button>
+
+<div class="modal fade" id="modal-danger">
+  <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+      <div class="modal-header">
+        <h4 class="modal-title">Failed</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{failedMessage}}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button id="close" type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button id="validateModel"  name="dangerModel" [hidden]="true" data-toggle="modal" data-target="#modal-secondary"></button>
+
+<div class="modal fade" id="modal-secondary">
+  <div class="modal-dialog">
+    <div class="modal-content bg-secondary">
+      <div class="modal-header">
+        <h4 class="modal-title">Item Delete</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to complete this order&hellip;</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="no()">No</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="CompleteOrder()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

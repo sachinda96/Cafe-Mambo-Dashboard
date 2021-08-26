@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
   <section class="content">
     <div class="container-fluid">
@@ -5,27 +6,27 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Item List</h3>
+              <h3 class="card-title">Shop Order List</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Category</th>
+                  <th>Customer Name</th>
+                  <th>Customer Contact</th>
                   <th>Price</th>
-                  <th></th>
+                  <th>Table Number</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of ItemList">
-                  <td>{{item.name}}</td>
-                  <td>{{item.categoryName}}</td>
-                  <td>{{item.price}}</td>
-                  <td><i style="color: orange" class="fas fa-edit" [routerLink]="['/nav/manageitem',item.id]"></i></td>
-                  <td><i style="color: red" class="fas fa-trash-alt" (click)="deleteItem(item.id)"></i></td>
+                <tr *ngFor="let shoporder of shopOrderList">
+                  <td>{{shoporder.customerName}}</td>
+                  <td>{{shoporder.contactNumber}}</td>
+                  <td>{{shoporder.price}}</td>
+                  <td>{{shoporder.tableId}}</td>
+                  <td><i class="fas fa-eye" [routerLink]="['/nav/viewshoporder',shoporder.id]" style="color: black"></i></td>
 
                 </tr>
 
@@ -34,23 +35,23 @@
 
                 </tfoot>
               </table>
-              <nav aria-label="Page navigation example" style="float: right">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <!--              <nav aria-label="Page navigation example" style="float: right">-->
+              <!--                <ul class="pagination">-->
+              <!--                  <li class="page-item">-->
+              <!--                    <a class="page-link" href="#" aria-label="Previous">-->
+              <!--                      <span aria-hidden="true">&laquo;</span>-->
+              <!--                      <span class="sr-only">Previous</span>-->
+              <!--                    </a>-->
+              <!--                  </li>-->
+              <!--                  <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+              <!--                  <li class="page-item">-->
+              <!--                    <a class="page-link" href="#" aria-label="Next">-->
+              <!--                      <span aria-hidden="true">&raquo;</span>-->
+              <!--                      <span class="sr-only">Next</span>-->
+              <!--                    </a>-->
+              <!--                  </li>-->
+              <!--                </ul>-->
+              <!--              </nav>-->
             </div>
             <!-- /.card-body -->
           </div>
@@ -76,6 +77,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-outline-light" data-dismiss="modal">Done</button>
+        <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
       </div>
     </div>
   </div>
@@ -119,8 +121,8 @@
         <p>Are you sure want to delete this item&hellip;</p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="clearSelet()">No</button>
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="delete()">Yes</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" >No</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" >Yes</button>
       </div>
     </div>
   </div>

@@ -14,6 +14,8 @@ import {ManageTablesComponent} from "./manage-tables/manage-tables.component";
 import {EventBookingComponent} from "./event-booking/event-booking.component";
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { ViewUserComponent } from './view-user/view-user.component';
+import {ShopOrdersComponent} from "./shop-orders/shop-orders.component";
+import {ViewShopOrderComponent} from "./view-shop-order/view-shop-order.component";
 
 
 const routes: Routes = [
@@ -103,6 +105,14 @@ const routes: Routes = [
         path: 'alluser',
         component: ViewUserComponent,
       },
+      {
+        path: 'shoporder',
+        component: ShopOrdersComponent,
+      },
+      {
+        path: 'viewshoporder/:id',
+        component: ViewShopOrderComponent,
+      }
     ],
 
   },

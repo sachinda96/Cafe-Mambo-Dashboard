@@ -20,6 +20,10 @@ import { ManageTablesComponent } from './manage-tables/manage-tables.component';
 import {QRCodeModule} from "angularx-qrcode";
 import { EventBookingComponent } from './event-booking/event-booking.component';
 import { ViewUserComponent } from './view-user/view-user.component';
+import { ShopOrdersComponent } from './shop-orders/shop-orders.component';
+import { ViewShopOrderComponent } from './view-shop-order/view-shop-order.component';
+import {CarouselModule} from "ngx-owl-carousel-o";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -38,14 +42,19 @@ import { ViewUserComponent } from './view-user/view-user.component';
     ManageUserComponent,
     ManageTablesComponent,
     EventBookingComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    ShopOrdersComponent,
+    ViewShopOrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    QRCodeModule
+    QRCodeModule,
+    BrowserAnimationsModule,
+    CarouselModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
