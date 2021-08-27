@@ -1,15 +1,43 @@
-<div class="content-wrapper">
-  <section class="content">
+
+<div class="content-wrapper" >
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
+  <section class="content" >
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="card">
+            <div class="row">
+              <div class="col-12">
             <div class="card-header">
-              <h3 class="card-title">Item List</h3>
+              <div class="row">
+                <div class="col-7">
+                  <h3  >Item List</h3>
+                  </div>
+                <div class="col-2">
+                  <input type="text" class="form-control" placeholder="Value" id="value" name="value" [(ngModel)]="value">
+                </div>
+                <div class="col-2">
+                  <select class="form-control"  (change)="setType($event)" [value]="type">
+                    <option value="Item Name">Item Name</option>
+                    <option value="Category">Category</option>
+                  </select>
+                </div>
+                <div class="col-1">
+
+                  <button type="button" class="btn btn-block btn-primary" (click)="search()">Search</button>
+
+                </div>
+              </div>
+
+            </div>
+              </div>
+
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-hover">
+            <div class="card-body" *ngIf="!isLoading" >
+              <table id="example1" class="table table-bordered table-hover" style="max-height: 500px;overflow-y: auto">
                 <thead>
                 <tr>
                   <th>Name</th>
@@ -34,23 +62,7 @@
 
                 </tfoot>
               </table>
-              <nav aria-label="Page navigation example" style="float: right">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+
             </div>
             <!-- /.card-body -->
           </div>

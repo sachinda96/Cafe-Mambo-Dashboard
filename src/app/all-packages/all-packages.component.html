@@ -1,12 +1,25 @@
 
 <div class="content-wrapper">
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Package List</h3>
+              <div class="row">
+                <div class="col-9">
+                  <h3  >Package List</h3>
+                </div>
+                <div class="col-2">
+                  <input type="text" class="form-control" placeholder="Package Name" id="value" name="value" [(ngModel)]="value">
+                </div>
+                <div class="col-1">
+                  <button type="button" class="btn btn-block btn-primary" (click)="search()">Search</button>
+                </div>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -20,7 +33,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let package of packageList">
+                <tr *ngFor="let package of tempPackageList">
                   <td>{{package.name}}</td>
                   <td>{{package.price}}</td>
                   <td><i style="color: orange" class="fas fa-edit" [routerLink]="['/nav/newpackage',package.id]"></i></td>

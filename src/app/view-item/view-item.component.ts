@@ -17,6 +17,9 @@ export class ViewItemComponent implements OnInit {
   modelError: any;
   modelValidate: any;
   id: any = "";
+  value: any;
+  type: any;
+  isLoading:boolean = false;
 
   constructor(private itemService:ItemService) { }
 
@@ -28,10 +31,12 @@ export class ViewItemComponent implements OnInit {
   }
 
   getAllItem() {
+    this.isLoading = true;
     this.ItemList = new Array<Item>();
        this.itemService.getAllItem().subscribe(
          res=>{
            this.ItemList = res;
+            this.isLoading = false;
          }
        );
     }
@@ -42,13 +47,17 @@ export class ViewItemComponent implements OnInit {
       this.id = id;
       this.modelValidate.click();
     }else {
+      this.isLoading = true;
       this.itemService.removeItem(id).subscribe(
         res=>{
+          this.isLoading = false;
           this.id = "";
           this.message = "Successfully Deleted";
           this.modelSuccess.click();
+
           this.getAllItem();
         },error => {
+          this.isLoading = false;
           this.failedMessage = "Failed to delete"
           this.modelError.click();
         }
@@ -63,4 +72,22 @@ export class ViewItemComponent implements OnInit {
   clearSelet() {
     this.id = "";
   }
+
+  search() {
+    if(this.value == ""){
+      this.getAllItem();
+    }else if(this.type == "Item Name"){
+       this.ItemList= this.ItemList.filter(item => item.name.includes(this.value));
+    }else if(this.type == "Category"){
+      this.ItemList= this.ItemList.filter(item => item.categoryName.includes(this.value));
+    }else {
+
+    }
+  }
+
+  setType(event: any) {
+    this.type = event.target.value;
+  }
+
+
 }

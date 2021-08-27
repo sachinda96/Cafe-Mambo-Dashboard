@@ -1,6 +1,9 @@
 
 <div class="content-wrapper">
-<section class="content">
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
+<section class="content" *ngIf="!isLoading">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
@@ -10,6 +13,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+            <i class="fas fa-sync-alt fa-2x" style="float: right;color: blue;margin-right: 5px;margin-bottom: 5px" (click)="refresh()"></i>
             <table id="example1" class="table table-bordered table-hover">
               <thead>
               <tr>

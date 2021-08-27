@@ -15,6 +15,9 @@ export class AllPackagesComponent implements OnInit {
   modelError: any;
   modelValidate: any;
   id: any = "";
+  isLoading: boolean = false;
+  value: any = "";
+  tempPackageList:Array<Package> = new Array<Package>();
 
   constructor(private packageService:PackageService) { }
 
@@ -26,7 +29,7 @@ export class AllPackagesComponent implements OnInit {
   }
 
   clearSelect() {
-
+    this.id = "";
   }
 
   delete() {
@@ -34,10 +37,15 @@ export class AllPackagesComponent implements OnInit {
   }
 
    getAllPackages() {
+    this.isLoading = true;
     this.packageList = new Array<Package>();
     this.packageService.getAll().subscribe(
       res=>{
+        this.isLoading = false;
         this.packageList = res;
+        this.tempPackageList =res;
+      },error => {
+        this.isLoading = false;
       }
     );
 
@@ -48,17 +56,28 @@ export class AllPackagesComponent implements OnInit {
       this.id = id;
       this.modelValidate.click();
     }else {
+      this.isLoading = true;
       this.packageService.remove(id).subscribe(
         res=>{
+          this.isLoading = false;
           this.id = "";
           this.message = "Successfully Deleted";
           this.modelSuccess.click();
           this.getAllPackages();
         },error => {
+          this.isLoading = false;
           this.failedMessage = "Failed to delete"
           this.modelError.click();
         }
       )
     }
+  }
+
+  search() {
+      if(this.value == ""){
+        this.getAllPackages();
+      }else {
+        this.tempPackageList = this.packageList.filter(pac => pac.name.includes(this.value));
+      }
   }
 }

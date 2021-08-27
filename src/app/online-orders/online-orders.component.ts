@@ -12,6 +12,7 @@ export class OnlineOrdersComponent implements OnInit {
   orderList:Array<Order> = new Array<Order>();
   message: any;
   failedMessage: any;
+  isLoading: any= false;
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
@@ -19,13 +20,19 @@ export class OnlineOrdersComponent implements OnInit {
   }
 
   private getPendingOrders() {
+    this.isLoading =true;
     this.orderService.getPendingOrders().subscribe(
       res=>{
         this.orderList =  res;
+        this.isLoading =false;
       },error => {
+        this.isLoading =false;
         error.error();
       }
     );
   }
 
+  refresh(){
+    this.getPendingOrders();
+  }
 }

@@ -1,5 +1,7 @@
 <div class="content-wrapper">
-
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -122,7 +124,7 @@
           <div class="col-lg-12">
             <div class="form-group">
               <label >Category Name</label>
-              <input type="text" class="form-control" placeholder="Name" id="name" name="name" [(ngModel)]="category.name">
+              <input type="text" class="form-control" placeholder="Name" id="name" name="name" [(ngModel)]="category.name" maxlength="20">
             </div>
           </div>
         </div>
@@ -151,7 +153,7 @@
         <p>Are you sure want to delete this Category&hellip;</p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal" >No</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="no()">No</button>
         <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="delete()">Yes</button>
       </div>
     </div>

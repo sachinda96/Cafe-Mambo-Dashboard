@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
+import {__assign} from "tslib";
+import {elementAt} from "rxjs/operators";
 
 @Component({
   selector: 'app-manage-user',
@@ -23,6 +25,12 @@ export class ManageUserComponent implements OnInit {
   type: any = 'Save';
   imageModel: any;
   isDisabled:boolean = false;
+  nameInvalid: boolean =false;
+  emailInvalid: boolean = false;
+  ContactInvalid: boolean =false;
+  passwordInvalid: boolean = false;
+  roleInvalid: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -44,8 +52,9 @@ export class ManageUserComponent implements OnInit {
   }
 
   getUser(id: any) {
+    this.isLoading = true;
     this.userService.getUser(id).subscribe((res) => {
-
+      this.isLoading = false;
       this.user = res;
     });
   }
@@ -62,17 +71,34 @@ export class ManageUserComponent implements OnInit {
     }
   }
   save() {
-    if (this.user.email == '') {
-      this.failedMessage = 'Enter a valid Email';
-      this.modelError.click();
-    } else {
+    this.nameInvalid = false;
+    this.emailInvalid =false;
+    this.ContactInvalid = false;
+    this.roleInvalid =false;
+    this.passwordInvalid =false;
+
+    if(this.user.name == ""){
+      this.nameInvalid = true;
+    }else if (this.user.email == "") {
+      this.emailInvalid =true;
+    }else if(this.user.telNo == "") {
+      this.ContactInvalid = true;
+    }else if(this.user.role == "") {
+      this.roleInvalid =true;
+    }else if(this.user.password == "") {
+        this.passwordInvalid =true;
+    }else{
+      this.isLoading = true;
       if (this.type == 'Update') {
+
         this.userService.update(this.user).subscribe(
           (res) => {
-            this.message = 'Employee is Updated';
+            this.isLoading = false;
+            this.message = 'User is Updated';
             this.modelSuccess.click();
           },
           (err) => {
+            this.isLoading = false;
             this.failedMessage = 'Failed to update';
             this.modelError.click();
           }
@@ -80,10 +106,12 @@ export class ManageUserComponent implements OnInit {
       } else {
         this.userService.save(this.user).subscribe(
           (res) => {
-            this.message = 'Employee is Added Successfully';
+            this.isLoading = false;
+            this.message = 'User is Added Successfully';
             this.modelSuccess.click();
           },
           (error) => {
+            this.isLoading = false;
             this.failedMessage = 'Failed to save';
             this.modelError.click();
           }

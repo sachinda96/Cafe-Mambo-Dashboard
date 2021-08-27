@@ -20,6 +20,9 @@ export class ManageItemComponent implements OnInit {
   modelError: any;
   type: any = 'Save';
   imageModel: any;
+  nameInvalid: boolean = false;
+  priceInvalid: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
@@ -69,36 +72,49 @@ export class ManageItemComponent implements OnInit {
   }
 
   save() {
-    let formData: FormData = new FormData();
-    formData.append('file', this.file);
-    formData.append('data', JSON.stringify(this.item));
+    this.nameInvalid = false;
+    this.priceInvalid = false;
+    if(this.item.name == ""){
+      this.nameInvalid = true;
+    }else if(this.item.price == 0){
+      this.priceInvalid = true;
+    }else {
+      let formData: FormData = new FormData();
+      formData.append('file', this.file);
+      formData.append('data', JSON.stringify(this.item));
 
-    if (this.item.categoryId == '') {
-      this.failedMessage = 'Select Correct Category';
-      this.modelError.click();
-    } else {
-      if (this.type == 'Update') {
-        this.itemService.update(formData).subscribe(
-          (res) => {
-            this.message = 'Item Updated';
-            this.modelSuccess.click();
-          },
-          (error) => {
-            this.failedMessage = 'Failed to update';
-            this.modelError.click();
-          }
-        );
+      if (this.item.categoryId == '') {
+        this.failedMessage = 'Select Correct Category';
+        this.modelError.click();
       } else {
-        this.itemService.save(formData).subscribe(
-          (res) => {
-            this.message = 'Item is Added Successfully';
-            this.modelSuccess.click();
-          },
-          (error) => {
-            this.failedMessage = 'Failed to save';
-            this.modelError.click();
-          }
-        );
+        this.isLoading = true;
+        if (this.type == 'Update') {
+          this.itemService.update(formData).subscribe(
+            (res) => {
+              this.isLoading = false;
+              this.message = 'Item Updated';
+              this.modelSuccess.click();
+            },
+            (error) => {
+              this.isLoading = false;
+              this.failedMessage = 'Failed to update';
+              this.modelError.click();
+            }
+          );
+        } else {
+          this.itemService.save(formData).subscribe(
+            (res) => {
+              this.isLoading = false;
+              this.message = 'Item is Added Successfully';
+              this.modelSuccess.click();
+            },
+            (error) => {
+              this.isLoading = false;
+              this.failedMessage = 'Failed to save';
+              this.modelError.click();
+            }
+          );
+        }
       }
     }
   }
@@ -113,8 +129,10 @@ export class ManageItemComponent implements OnInit {
   }
 
   getItem(id: any) {
+    this.isLoading = true;
     this.itemService.getItem(id).subscribe((res) => {
       this.item = res;
+      this.isLoading = false;
     });
   }
 

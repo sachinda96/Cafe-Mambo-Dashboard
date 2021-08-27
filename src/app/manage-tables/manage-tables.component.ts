@@ -19,6 +19,7 @@ export class ManageTablesComponent implements OnInit {
   message: any;
   modelSuccess: any;
   modelError: any;
+  isLoading: boolean = false;
 
   constructor(private shopOrderService:ShopOrderService) { }
 
@@ -31,35 +32,45 @@ export class ManageTablesComponent implements OnInit {
 
   generateTable() {
       this.isGenerateQr = true;
+    this.data = this.tempData+this.shopTable.tableNumber;
   }
 
   save() {
 
-    this.shopOrderService.addShopTables(this.shopTable).subscribe(
-      res=>{
-        this.message = "Table Details Added";
-        this.modelSuccess.click();
-      },error => {
-        this.failedMessage = "Failed to add Table"
-        this.modelError.click();
-      }
-    )
+    let list = this.tableList.filter(e => e.tableNumber == this.shopTable.tableNumber);
 
+    if(list.length> 0){
+      this.failedMessage = "This table number already added";
+      this.modelError.click();
+    }else {
+      this.isLoading =true;
+      this.shopOrderService.addShopTables(this.shopTable).subscribe(
+        res => {
+          this.isLoading =false;
+          this.message = "Table Details Added";
+          this.modelSuccess.click();
+        }, error => {
+          this.isLoading =false;
+          this.failedMessage = "Failed to add Table"
+          this.modelError.click();
+        }
+      )
+    }
   }
 
   addNew() {
 
   }
 
-  setNumber($event: Event) {
+  setNumber(event: any) {
     this.isGenerateQr = true;
-    this.data = this.tempData+this.shopTable.tableNumber;
+    this.data = this.tempData+event.target.value;
   }
 
   isAddNew() {
-    this.isAdd = true;
-    this.isGenerateQr = false;
-    this.data = this.tempData+this.shopTable.tableNumber;
+      this.isAdd = true;
+      this.isGenerateQr = false;
+
   }
 
   cancel() {
@@ -69,11 +80,16 @@ export class ManageTablesComponent implements OnInit {
   }
 
    getAllShopTable() {
-
+    this.isGenerateQr = true;
     this.tableList = new Array<ShopTable>();
     this.shopOrderService.getAllShopTable().subscribe(
       res=>{
+        this.isGenerateQr = false;
         this.tableList = res;
+        if(this.tableList.length > 0){
+          this.tableList =  this.tableList.sort((a, b) => a.tableNumber < b.tableNumber ? -1 : a.tableNumber > b.tableNumber ? 1 : 0)
+
+        }
       }
     );
 

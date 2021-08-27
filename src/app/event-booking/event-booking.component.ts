@@ -17,6 +17,7 @@ export class EventBookingComponent implements OnInit {
   modelSuccess: any;
   modelError: any;
   modelValidate: any;
+  isLoading: boolean = false;
 
   constructor(private eventBookingService:EventBookingService) {
 
@@ -36,12 +37,14 @@ export class EventBookingComponent implements OnInit {
   }
 
    getPendingEvents() {
-
+     this.isLoading = true;
     this.eventBookingList = new Array<EventBooking>();
     this.eventBookingService.getPendingOrder().subscribe(
       res=>{
-        console.log(res);
+        this.isLoading = false;
         this.eventBookingList = res;
+      },error => {
+        this.isLoading = false;
       }
     );
 
@@ -49,15 +52,18 @@ export class EventBookingComponent implements OnInit {
 
   complete(id:string) {
 
-    if(this.id = ""){
+    if(this.id == ""){
       this.id = id;
       this.modelValidate.click();
     }else {
+      this.isLoading = true;
       this.eventBookingService.complete(id).subscribe(
         res=>{
+          this.isLoading = false;
           this.message = 'Event Updated';
           this.modelSuccess.click();
         },error => {
+          this.isLoading = false;
           this.failedMessage = 'Event Update Failed';
           this.modelError.click();
 
@@ -69,6 +75,14 @@ export class EventBookingComponent implements OnInit {
   }
 
   completeEvent() {
+    this.complete(this.id);
+  }
 
+  refresh() {
+    this.getPendingEvents();
+  }
+
+  no() {
+    this.id ="";
   }
 }

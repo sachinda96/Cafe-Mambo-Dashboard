@@ -15,6 +15,7 @@ export class ShopOrdersComponent implements OnInit {
   message: any;
   failedMessage: any;
   id:any = "";
+  isLoading: boolean = false;
 
   constructor(private shopOrderService:ShopOrderService) { }
 
@@ -23,15 +24,22 @@ export class ShopOrdersComponent implements OnInit {
   }
 
    getAllShopOrderByUser() {
+    this.isLoading = true;
     this.id = sessionStorage.getItem('user');
     if(this.id != ""){
       this.shopOrderService.getAllOrdersUserRole(this.id).subscribe(res=>{
         if(res){
-          console.log(res)
           this.shopOrderList = res;
+          this.isLoading = false;
         }
+      },error => {
+        this.isLoading = false;
       });
     }
 
+  }
+
+  refresh() {
+    this.getAllShopOrderByUser();
   }
 }

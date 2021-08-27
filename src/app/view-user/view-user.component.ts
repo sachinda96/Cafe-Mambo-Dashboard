@@ -9,12 +9,16 @@ import { UserService } from '../service/user.service';
 })
 export class ViewUserComponent implements OnInit {
   userList: Array<User> = new Array<User>();
+  tempUserList: Array<User> = new Array<User>();
   message: any;
   failedMessage: any;
   modelSuccess: any;
   modelError: any;
   modelValidate: any;
   id: any = '';
+  value: any;
+  type: any;
+  isLoading: boolean = false;
 
   constructor(private userService: UserService) {
 
@@ -29,9 +33,12 @@ export class ViewUserComponent implements OnInit {
 
   getAllUsers() {
     this.userList = new Array<User>();
-
+    this.tempUserList = new Array<User>();
+    this.isLoading = true;
     this.userService.getAllUser().subscribe((res) => {
+      this.isLoading = false;
       this.userList = res;
+      this.tempUserList = res;
     });
   }
 
@@ -40,14 +47,17 @@ export class ViewUserComponent implements OnInit {
       this.id = id;
       this.modelValidate.click();
     } else {
+      this.isLoading = true;
       this.userService.removeUser(id).subscribe(
         (res) => {
+          this.isLoading = false;
           this.id = '';
           this.message = 'Successfully Deleted';
           this.modelSuccess.click();
           this.getAllUsers();
         },
         (err) => {
+          this.isLoading = false;
           this.failedMessage = 'Failed to delete';
           this.modelError.click();
         }
@@ -61,5 +71,21 @@ export class ViewUserComponent implements OnInit {
 
   clearSelect() {
     this.id = '';
+  }
+
+  setType(event: any) {
+    this.type = event.target.value;
+  }
+
+  search() {
+    if(this.value == ""){
+      this.getAllUsers();
+    }else if(this.type == "name"){
+      this.tempUserList = this.userList.filter(user => user.name.includes(this.value));
+    }else if(this.type == "email"){
+      this.tempUserList = this.userList.filter(user => user.email.includes(this.value));
+    }else if(this.type == "role"){
+      this.tempUserList = this.userList.filter(user => user.role.includes(this.value));
+    }
   }
 }

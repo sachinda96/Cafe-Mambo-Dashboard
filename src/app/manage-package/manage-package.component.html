@@ -1,8 +1,10 @@
 <div class="content-wrapper">
-
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
   <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">Manage Item</h3>
+      <h3 class="card-title">Manage Package</h3>
     </div>
     <form>
 
@@ -13,11 +15,17 @@
               <label >Item Name</label>
               <input type="text" class="form-control" id="name" name="name" placeholder="Package Name" [(ngModel)]="package.name">
             </div>
+            <div style="color: red" *ngIf="nameInvalid">
+              *  Name is required.
+            </div>
           </div>
           <div class="col-lg-6">
             <div class="form-group">
               <label >Price</label>
               <input type="number" class="form-control" placeholder="Price" id="price" name="price" [(ngModel)]="package.price">
+            </div>
+            <div style="color: red" *ngIf="priceInvalid">
+              *  Price is required.
             </div>
           </div>
         </div>

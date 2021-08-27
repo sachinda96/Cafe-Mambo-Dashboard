@@ -9,19 +9,25 @@ import {Router} from "@angular/router";
 export class NavBarComponent implements OnInit {
   name: any;
   role:any;
-  isTest:boolean = false;
+  isTest:boolean = true;
 
   constructor(private route:Router) {
 
   }
 
   ngOnInit(): void {
+    if (!localStorage.getItem("justOnce")) {
+        localStorage.setItem("justOnce", "true");
+        window.location.reload();
+      }
+
     this.name = sessionStorage.getItem("name")
     this.role = sessionStorage.getItem("role")
-   // this.getAll();
+
   }
 
   logOut() {
+    localStorage.clear();
     sessionStorage.clear()
     this.route.navigate(['']);
   }

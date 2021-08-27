@@ -1,15 +1,19 @@
 
 <div class="content-wrapper">
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Event List</h3>
+              <h3 >Event List</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+              <i class="fas fa-sync-alt fa-2x" style="float: right;color: blue;margin-right: 5px;margin-bottom: 5px" (click)="refresh()"></i>
               <table id="example1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -84,7 +88,7 @@
         <p>{{message}}&hellip;</p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Done</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="refresh()">Done</button>
         <!--        <button type="button" class="btn btn-outline-light">Done</button>-->
       </div>
     </div>
@@ -126,10 +130,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure want to delete this item&hellip;</p>
+        <p>Are you sure want to complete this event&hellip;</p>
       </div>
       <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-outline-light" data-dismiss="modal" >No</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="no()">No</button>
         <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="completeEvent()">Yes</button>
       </div>
     </div>

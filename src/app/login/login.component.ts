@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("name",this.token.name)
         this.route.navigate(['nav']);
       },error => {
-        this.errortext =  "*"+error.error.text;
+        console.log(error)
+        this.errortext =  "*"+error.error;
       }
     );
     // [routerLink]="['nav']"

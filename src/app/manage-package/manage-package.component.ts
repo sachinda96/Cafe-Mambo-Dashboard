@@ -26,49 +26,72 @@ export class ManagePackageComponent implements OnInit {
   message: any;
   modelSuccess: any;
   modelError: any;
+  nameInvalid: boolean =false;
+  priceInvalid: boolean = false;
+  isLoading: boolean =false;
 
   constructor(private categoryService: CategoryService,private itemService:ItemService,private packageService:PackageService,private routerActive: ActivatedRoute,private route:Router) { }
 
   ngOnInit(): void {
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.type = "Update"
         this.getPackage(params.id);
       }
     });
-    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
-    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+
     this.getAllCategory();
   }
 
   save() {
 
-    this.package.itemIdList = this.itemIdList;
-    let formData:FormData = new FormData();
-    formData.append('file', this.file);
-    formData.append('data',JSON.stringify(this.package));
+    this.nameInvalid = false;
+    this.priceInvalid = false;
 
-    if(this.type == "Update"){
-      this.packageService.update(formData).subscribe(
-        res=>{
-          this.message = "Package Updating successfully";
-          this.modelSuccess.click();
-        },error => {
-          this.modelError = "Package updating failed";
-          this.modelError.click();
-        }
-      );
+    if(this.package.name == ""){
+      this.nameInvalid = true;
+    }else if(this.package.price == ""){
+      this.priceInvalid = true;
+    }else if(this.itemIdList.length == 0) {
+      this.failedMessage = "Items can not empty";
+      this.modelError.click();
     }else {
-      this.packageService.save(formData).subscribe(
-        res=>{
-          this.message = "Package Saving successfully";
-          this.modelSuccess.click();
-        },error => {
-          this.modelError = "Package Saving failed";
-          this.modelError.click();
-        }
-      );
+      this.isLoading =true;
+      this.package.itemIdList = this.itemIdList;
+      let formData:FormData = new FormData();
+      formData.append('file', this.file);
+      formData.append('data',JSON.stringify(this.package));
+
+      if(this.type == "Update"){
+        this.packageService.update(formData).subscribe(
+          res=>{
+            this.isLoading =false;
+            this.message = "Package Updating successfully";
+            this.modelSuccess.click();
+          },error => {
+            this.isLoading =false;
+            this.failedMessage = "Package updating failed";
+            this.modelError.click();
+          }
+        );
+      }else {
+        this.packageService.save(formData).subscribe(
+          res=>{
+            this.isLoading =false;
+            this.message = "Package Saving successfully";
+            this.modelSuccess.click();
+          },error => {
+            this.isLoading =false;
+            this.failedMessage = "Package Saving failed";
+            this.modelError.click();
+          }
+        );
+      }
+
     }
+
 
 
   }
@@ -138,10 +161,14 @@ export class ManagePackageComponent implements OnInit {
   }
 
   getPackage(id: any) {
+    this.isLoading =true;
     this.packageService.get(id).subscribe(
       res=>{
+        this.isLoading =false;
         this.package = res;
         this.itemIdList = this.package.itemIdList;
+      },error => {
+        this.isLoading =false;
       }
     );
 
