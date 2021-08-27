@@ -1,6 +1,9 @@
 
 <div class="content-wrapper">
-  <!-- Main content -->
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
+
   <div class="invoice p-3 mb-3">
     <div class="row">
       <div class="col-12">
@@ -99,7 +102,7 @@
 <!-- this row will not appear when printing -->
 <div class="row no-print">
   <div class="col-12">
-    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+<!--    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>-->
     <button type="button" class="btn btn-success float-right" (click)="dispatchOrder()"><i class="far fa-credit-card"></i> Dispatch Order
     </button>
     <button type="button" class="btn btn-danger float-right" style="margin-right: 5px;"  (click)="cancelOrder()">
@@ -155,3 +158,22 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<button id="validateModel"  name="dangerModel" [hidden]="true" data-toggle="modal" data-target="#modal-secondary"></button>
+
+<div class="modal fade" id="modal-secondary">
+  <div class="modal-dialog">
+    <div class="modal-content bg-secondary">
+      <div class="modal-header">
+        <h4 class="modal-title">Online Order</h4>
+
+      </div>
+      <div class="modal-body">
+        <p>{{validateMessage}}</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="no()">No</button>
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="yes()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

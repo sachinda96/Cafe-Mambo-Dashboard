@@ -21,6 +21,11 @@ export class ViewOrderComponent implements OnInit {
   modelError: any;
   close: any;
   message:any;
+  validateMessage: any;
+  modelValidate: any;
+  isDispatched: Boolean = false;
+  isCancel: Boolean = false;
+  isLoading: boolean = false;
 
 
   constructor(private orderService:OrderService,private routerActive: ActivatedRoute,private route:Router) {
@@ -31,7 +36,7 @@ export class ViewOrderComponent implements OnInit {
   ngOnInit(): void {
     this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
     this.modelError =  document.getElementById("dangerModel") as HTMLElement;
-
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.getOrder(params.id);
@@ -42,11 +47,13 @@ export class ViewOrderComponent implements OnInit {
   }
 
   getOrder(id:string){
+    this.isLoading = true;
     this.orderService.getOrder(id).subscribe(
       res=>{
-
+        this.isLoading = false;
         this.order =res;
       },error => {
+        this.isLoading = false;
         error.error();
       }
     );
@@ -54,34 +61,67 @@ export class ViewOrderComponent implements OnInit {
 
   dispatchOrder() {
 
-    this.orderService.dispatchOrder(this.order.id).subscribe(
-      res=>{
-        this.message = "Order Dispatch Success";
-        this.modelSuccess.click();
-        //this.close.click();
-      },error => {
-        console.log(error)
-        this.modelError.click();
-      }
-    );
+    if(this.isDispatched == false){
+      this.isDispatched = true;
+      this.validateMessage = "Are you sure want to dispatch this...";
+      this.modelValidate.click();
+    }else{
+      this.isLoading = true;
+      this.orderService.dispatchOrder(this.order.id).subscribe(
+        res=>{
+          this.isLoading = false;
+          this.isDispatched = false;
+          this.message = "Order Dispatch Success";
+          this.modelSuccess.click();
+          //this.close.click();
+        },error => {
+          this.isLoading = false;
+          console.log(error)
+          this.modelError.click();
+        }
+      );
+    }
+
+
    }
 
   cancelOrder() {
 
-    this.orderService.cancelOrder(this.order.id).subscribe(
-      res=>{
-        this.message = "Order Canceled"
-        this.modelSuccess.click();
-      },error => {
-        this.modelError.click();
-      }
-    );
+    if(this.isCancel == false){
+      this.isCancel = true;
+      this.validateMessage = "Are you sure want to cancel this...";
+      this.modelValidate.click();
+    }else {
+      this.isLoading = true;
+      this.orderService.cancelOrder(this.order.id).subscribe(
+        res => {
+          this.isLoading = false;
+          this.isCancel =false;
+          this.message = "Order Canceled"
+          this.modelSuccess.click();
+        }, error => {
+          this.isLoading = false;
+          this.modelError.click();
+        }
+      );
+    }
    }
 
   routeBack() {
-    console.log("work")
     this.route.navigate(['nav/onlineorder'])
   }
 
 
+  yes() {
+    if(this.isDispatched){
+      this.dispatchOrder();
+    }else if(this.isCancel){
+      this.cancelOrder();
+    }
+  }
+
+  no() {
+    this.isDispatched = false;
+    this.isCancel = false;
+  }
 }

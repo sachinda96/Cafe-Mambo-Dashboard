@@ -50,14 +50,18 @@ export class ManagePackageComponent implements OnInit {
     this.nameInvalid = false;
     this.priceInvalid = false;
 
+    console.log("work")
+
     if(this.package.name == ""){
       this.nameInvalid = true;
     }else if(this.package.price == ""){
       this.priceInvalid = true;
     }else if(this.itemIdList.length == 0) {
+      console.log("work 2")
       this.failedMessage = "Items can not empty";
       this.modelError.click();
     }else {
+      console.log("work 4")
       this.isLoading =true;
       this.package.itemIdList = this.itemIdList;
       let formData:FormData = new FormData();
@@ -117,10 +121,13 @@ export class ManagePackageComponent implements OnInit {
   }
 
   getAllItemByCategory(categoryId: string) {
+      this.isLoading = true;
       this.itemList = new Array<Item>();
       this.itemService.getAllItemByCategory(categoryId).subscribe(
         res=>{
+          this.isLoading = false;
           this.itemList = res;
+          console.log(this.itemList)
           this.itemList.forEach(e =>{
             this.itemIdList.forEach(id =>{
               if(e.id == id){

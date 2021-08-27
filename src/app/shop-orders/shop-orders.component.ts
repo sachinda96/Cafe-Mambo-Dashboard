@@ -16,10 +16,17 @@ export class ShopOrdersComponent implements OnInit {
   failedMessage: any;
   id:any = "";
   isLoading: boolean = false;
+  validateMessage: any;
+  modelSuccess: any;
+  modelError: any;
+  modelValidate: any;
 
   constructor(private shopOrderService:ShopOrderService) { }
 
   ngOnInit(): void {
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     this.getAllShopOrderByUser();
   }
 

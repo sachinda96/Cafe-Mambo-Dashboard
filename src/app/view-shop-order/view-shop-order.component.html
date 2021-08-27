@@ -1,5 +1,7 @@
 <div class="content-wrapper">
-  <!-- Main content -->
+  <div id="loading" *ngIf="isLoading">
+    <img src="./assets/loading.gif" style="margin-top: 14%;position: absolute;">
+  </div>
   <div class="invoice p-3 mb-3">
     <div class="row">
       <div class="col-12">
@@ -154,7 +156,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure want to complete this order&hellip;</p>
+        <p>{{validateMessage}}</p>
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-outline-light" data-dismiss="modal" (click)="no()">No</button>
@@ -163,4 +165,6 @@
     </div>
   </div>
 </div>
+
+
 

@@ -18,6 +18,8 @@ export class ViewShopOrderComponent implements OnInit {
   modelValidate: any;
   id : any = "";
   role: any;
+  isLoading: boolean = false;
+  validateMessage: any;
 
   constructor(private shopOrderService:ShopOrderService, private routerActive: ActivatedRoute,private route:Router) { }
 
@@ -34,17 +36,17 @@ export class ViewShopOrderComponent implements OnInit {
   }
 
   getShopOrder(id:any){
+    this.isLoading = true;
     this.shopOrderService.getShopOrder(id).subscribe(
       res=>{
+        this.isLoading = false;
         this.customerShopOrder = res;
       }
     );
   }
 
   complete() {
-
     if(this.id == ""){
-
       this.id =  this.customerShopOrder.id;
       this.modelValidate.click();
     }else{

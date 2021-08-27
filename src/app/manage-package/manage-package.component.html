@@ -82,7 +82,7 @@
                 <tr>
                   <th></th>
                   <th></th>
-                  <th>ITem Name</th>
+                  <th>Item Name</th>
                   <th>Price</th>
                   <th>Category</th>
                 </tr>
@@ -90,7 +90,7 @@
                 <tbody>
                 <tr *ngFor="let item of itemList">
                   <td>
-                    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="{{item.select}}" (click)="setItem(item.id)">
+                    <input  type="checkbox" id="vehicle1" name="vehicle1" value="Bike" [checked]="item.select" (click)="setItem(item.id)">
                   </td>
                   <td><img src="{{item.imagePath}}" style="height: 60px;width: 60px"></td>
                   <td>{{item.name}}</td>
