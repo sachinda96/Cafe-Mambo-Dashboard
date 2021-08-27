@@ -9,7 +9,8 @@ import {ShopOrderService} from "../service/shop-order.service";
 })
 export class ManageTablesComponent implements OnInit {
   type: any = "Save";
-  data:any = "https://adminlte.io/themes/v3/pages/UI/buttons.html";
+  tempData:any = "http://localhost:4200/shoporder/";
+  data:any ;
   tableList: Array<ShopTable> = new Array();
   isAdd: boolean = false;
   isGenerateQr: boolean = false;
@@ -52,16 +53,19 @@ export class ManageTablesComponent implements OnInit {
 
   setNumber($event: Event) {
     this.isGenerateQr = true;
+    this.data = this.tempData+this.shopTable.tableNumber;
   }
 
   isAddNew() {
     this.isAdd = true;
     this.isGenerateQr = false;
+    this.data = this.tempData+this.shopTable.tableNumber;
   }
 
   cancel() {
     this.isAdd = false;
     this.isGenerateQr = false;
+    this.data = "";
   }
 
    getAllShopTable() {
@@ -79,5 +83,6 @@ export class ManageTablesComponent implements OnInit {
     this.isAdd =false;
     this.getAllShopTable();
     this.isGenerateQr =false;
+    this.data = "";
   }
 }

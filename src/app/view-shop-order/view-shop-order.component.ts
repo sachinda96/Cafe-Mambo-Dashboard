@@ -17,6 +17,7 @@ export class ViewShopOrderComponent implements OnInit {
   modelError: any;
   modelValidate: any;
   id : any = "";
+  role: any;
 
   constructor(private shopOrderService:ShopOrderService, private routerActive: ActivatedRoute,private route:Router) { }
 
@@ -24,6 +25,7 @@ export class ViewShopOrderComponent implements OnInit {
     this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
     this.modelError =  document.getElementById("dangerModel") as HTMLElement;
     this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
+    this.role = sessionStorage.getItem("role");
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.getShopOrder(params.id);
