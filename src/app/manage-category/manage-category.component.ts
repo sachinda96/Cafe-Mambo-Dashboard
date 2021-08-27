@@ -19,6 +19,7 @@ export class ManageCategoryComponent implements OnInit {
   modelValidate: any;
   id: any = '';
   isLoading: boolean = false;
+  categoryInvalid: any = "";
 
   constructor(private categoryService: CategoryService) {}
 
@@ -84,7 +85,11 @@ export class ManageCategoryComponent implements OnInit {
 
   save() {
     this.isLoading = true;
-    if (this.type == 'Update') {
+    this.categoryInvalid = false;
+    if(this.category.name == ""){
+      this.categoryInvalid = true;
+      this.isLoading = false;
+    }else if (this.type == 'Update') {
       this.categoryService.update(this.category).subscribe(
         (res) => {
           this.isLoading = false;

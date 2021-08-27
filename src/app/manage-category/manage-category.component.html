@@ -126,6 +126,9 @@
               <label >Category Name</label>
               <input type="text" class="form-control" placeholder="Name" id="name" name="name" [(ngModel)]="category.name" maxlength="20">
             </div>
+            <div style="color: red" *ngIf="categoryInvalid">
+              * Category is required.
+            </div>
           </div>
         </div>
       </div>
