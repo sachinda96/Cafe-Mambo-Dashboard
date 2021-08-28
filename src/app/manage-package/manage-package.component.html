@@ -41,10 +41,10 @@
 
           <div class="row">
             <div class="col-lg-6">
-          <label for="exampleInputFile">File input</label>
+          <label for="exampleInputFile">File Input</label>
           <div class="input-group">
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="exampleInputFile" (change)="fileChange($event)">
+              <input type="file" class="custom-file-input" id="exampleInputFile" (change)="fileChange($event)" accept=".png, .jpg, .jpeg">
               <label class="custom-file-label" for="exampleInputFile" (change)="fileChange($event)">Choose file</label>
             </div>
           </div>
@@ -105,7 +105,7 @@
       </div>
 
       <div class="card-footer">
-        <button type="submit" class="btn btn-danger" >Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
         <button type="submit" class="btn btn-primary" style="float: right;" (click)="save()">{{type}}</button>
       </div>
     </form>

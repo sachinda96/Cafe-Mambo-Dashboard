@@ -60,7 +60,9 @@ export class ViewOrderComponent implements OnInit {
   }
 
   dispatchOrder() {
-
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     if(this.isDispatched == false){
       this.isDispatched = true;
       this.validateMessage = "Are you sure want to dispatch this...";
@@ -86,7 +88,9 @@ export class ViewOrderComponent implements OnInit {
    }
 
   cancelOrder() {
-
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     if(this.isCancel == false){
       this.isCancel = true;
       this.validateMessage = "Are you sure want to cancel this...";

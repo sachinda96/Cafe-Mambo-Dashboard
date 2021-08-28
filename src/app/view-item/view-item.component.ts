@@ -42,7 +42,9 @@ export class ViewItemComponent implements OnInit {
     }
 
   deleteItem(id:string) {
-
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     if(this.id == ""){
       this.id = id;
       this.modelValidate.click();

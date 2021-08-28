@@ -46,6 +46,9 @@ export class ViewShopOrderComponent implements OnInit {
   }
 
   complete() {
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     if(this.id == ""){
       this.id =  this.customerShopOrder.id;
       this.modelValidate.click();

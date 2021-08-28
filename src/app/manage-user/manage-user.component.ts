@@ -71,6 +71,11 @@ export class ManageUserComponent implements OnInit {
     }
   }
   save() {
+
+    this.modelSuccess = document.getElementById('modelSuccess') as HTMLElement;
+    this.modelError = document.getElementById('dangerModel') as HTMLElement;
+    this.imageModel = document.getElementById('imageModel') as HTMLElement;
+
     this.nameInvalid = false;
     this.emailInvalid =false;
     this.ContactInvalid = false;
@@ -118,5 +123,9 @@ export class ManageUserComponent implements OnInit {
         );
       }
     }
+  }
+
+  cancel() {
+    this.clear();
   }
 }

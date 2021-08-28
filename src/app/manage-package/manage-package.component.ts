@@ -46,22 +46,19 @@ export class ManagePackageComponent implements OnInit {
   }
 
   save() {
-
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
     this.nameInvalid = false;
     this.priceInvalid = false;
-
-    console.log("work")
 
     if(this.package.name == ""){
       this.nameInvalid = true;
     }else if(this.package.price == ""){
       this.priceInvalid = true;
     }else if(this.itemIdList.length == 0) {
-      console.log("work 2")
       this.failedMessage = "Items can not empty";
       this.modelError.click();
     }else {
-      console.log("work 4")
       this.isLoading =true;
       this.package.itemIdList = this.itemIdList;
       let formData:FormData = new FormData();
@@ -179,5 +176,9 @@ export class ManagePackageComponent implements OnInit {
       }
     );
 
+  }
+
+  cancel() {
+    this.clear();
   }
 }

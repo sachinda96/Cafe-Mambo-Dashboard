@@ -72,6 +72,9 @@ export class ManageItemComponent implements OnInit {
   }
 
   save() {
+    this.modelSuccess = document.getElementById('modelSuccess') as HTMLElement;
+    this.modelError = document.getElementById('dangerModel') as HTMLElement;
+    this.imageModel = document.getElementById('imageModel') as HTMLElement;
     this.nameInvalid = false;
     this.priceInvalid = false;
     if(this.item.name == ""){
@@ -91,6 +94,7 @@ export class ManageItemComponent implements OnInit {
         if (this.type == 'Update') {
           this.itemService.update(formData).subscribe(
             (res) => {
+              console.log("work")
               this.isLoading = false;
               this.message = 'Item Updated';
               this.modelSuccess.click();
@@ -138,5 +142,14 @@ export class ManageItemComponent implements OnInit {
 
   viewImage() {
     this.imageModel.click();
+  }
+
+  cancel() {
+    if(this.type == "Update"){
+      this.route.navigate(['/nav/allitems'])
+    }else {
+      this.item = new Item();
+      this.getAllCategory();
+    }
   }
 }

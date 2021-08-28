@@ -41,7 +41,7 @@
                 id="name"
                 name="name"
                 placeholder="Item Name"
-                [(ngModel)]="item.name"
+                [(ngModel)]="item.name" maxlength="100"
               />
               <div style="color: red" *ngIf="nameInvalid">
                 * Item Name is required.
@@ -87,7 +87,7 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="form-group">
-              <label for="exampleInputFile">File input</label>
+              <label for="exampleInputFile">File Input</label>
               <div class="input-group">
                 <div class="custom-file">
                   <input
@@ -122,7 +122,7 @@
       <!-- /.card-body -->
 
       <div class="card-footer">
-        <button type="submit" class="btn btn-danger">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
         <button
           type="submit"
           class="btn btn-primary"

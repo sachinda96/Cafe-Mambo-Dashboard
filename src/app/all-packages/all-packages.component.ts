@@ -52,6 +52,9 @@ export class AllPackagesComponent implements OnInit {
   }
 
   deletePackage(id: string) {
+    this.modelSuccess =  document.getElementById("modelSuccess") as HTMLElement;
+    this.modelError =  document.getElementById("dangerModel") as HTMLElement;
+    this.modelValidate =  document.getElementById("validateModel") as HTMLElement;
     if(this.id == ""){
       this.id = id;
       this.modelValidate.click();
@@ -65,6 +68,7 @@ export class AllPackagesComponent implements OnInit {
           this.modelSuccess.click();
           this.getAllPackages();
         },error => {
+          this.id = "";
           this.isLoading = false;
           this.failedMessage = "Failed to delete"
           this.modelError.click();
