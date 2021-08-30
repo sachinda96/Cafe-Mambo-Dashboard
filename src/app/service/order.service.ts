@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Order} from "../model/order";
 
-export const MAIN="http://localhost:8080"
+export const MAIN="https://8080-cs-848463771596-default.cs-asia-southeast1-ajrg.cloudshell.dev/"
 
 @Injectable({
   providedIn: 'root'
