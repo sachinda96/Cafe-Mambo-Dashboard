@@ -4,10 +4,10 @@ threadsafe: true
 handlers:
     - url: /(.*\.(js|css|svg|png)(|\.map))$
       static_files: dist/\1
-      upload: dist/(.*)(|\.map)
+      upload: dist/Cafe-Mambo-Dashboard/(.*)(|\.map)
     - url: /.*
-      static_files: dist/index.html
-      upload: dist/.*
+      static_files: dist/Cafe-Mambo-Dashboard/index.html
+      upload: dist/Cafe-Mambo-Dashboard/.*
 
 skip_files:
   - e2e/
